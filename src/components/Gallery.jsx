@@ -9,10 +9,10 @@ const photos = [
     emoji: '🎂',
   },
   {
-    src: '/Tanzim.jpg',
-    caption: 'tanzim (me)',
+    src: '/eatingcakewafa.jpg',
+    caption: 'the cutest cake moment 🎀',
     border: '3px solid #e0c3fc',
-    emoji: '🎉',
+    emoji: '🍰',
   },
   {
     src: '/handtogether.jpg',

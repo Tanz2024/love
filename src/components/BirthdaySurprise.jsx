@@ -7,25 +7,7 @@ export default function BirthdaySurprise({ onClose, overlayActive }) {
   const [audioPlayed, setAudioPlayed] = useState(false);
 
   useEffect(() => {
-    // Play music on overlay show
-    if (showCake && audioRef.current && !audioPlayed) {
-      const playAudio = () => {
-        audioRef.current.volume = 0.22;
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise.then(() => setAudioPlayed(true)).catch(() => {
-            // If autoplay is blocked, play on first user interaction
-            audioRef.current.play();
-            setAudioPlayed(true);
-          });
-        }
-      };
-      playAudio();
-    }
-  }, [showCake, audioPlayed]);
-
-  useEffect(() => {
-    // Dynamically load canvas-confetti
+    // Only confetti and progress logic here
     import('canvas-confetti').then((confetti) => {
       confetti.default({
         particleCount: 120,
@@ -34,28 +16,29 @@ export default function BirthdaySurprise({ onClose, overlayActive }) {
         colors: ['#f8e1e7', '#b07bac', '#e0c3fc', '#fff6f9', '#ffb347'],
       });
     });
-    // Progress bar and auto-hide
     let t = 0;
     const interval = setInterval(() => {
       t += 100;
       setProgress((t / 3500) * 100);
       if (t >= 3500) {
-        setShowCake(false);
-        if (onClose) onClose();
         clearInterval(interval);
       }
     }, 100);
     return () => clearInterval(interval);
   }, [onClose]);
 
+  // Only play audio on user interaction
   const handleClick = () => {
     if (audioRef.current && !audioPlayed) {
       audioRef.current.volume = 0.22;
       audioRef.current.play();
       setAudioPlayed(true);
     }
-    setShowCake(false);
-    if (onClose) onClose();
+    // Optionally delay hiding overlay for a moment after music starts
+    setTimeout(() => {
+      setShowCake(false);
+      if (onClose) onClose();
+    }, 300);
   };
 
   if (!showCake) return null;
@@ -102,6 +85,11 @@ export default function BirthdaySurprise({ onClose, overlayActive }) {
           src="/wafaandtanzim.png"
           alt="wafaandtanzim birthday surprise"
           style={{ width: '100%', height: 220, objectFit: 'contain', border: 'none', background: 'none', borderRadius: 18, boxShadow: '0 4px 24px #b07bac22', marginBottom: 12 }}
+        />
+        <img
+          src="/eatingcakewafa.jpg"
+          alt="Wafa eating cake birthday surprise"
+          style={{ width: '100%', height: 120, objectFit: 'cover', border: 'none', background: 'none', borderRadius: 14, boxShadow: '0 2px 12px #b07bac22', marginBottom: 10 }}
         />
         <div style={{
           fontFamily: 'Great Vibes, cursive',
