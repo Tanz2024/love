@@ -86,11 +86,6 @@ export default function BirthdaySurprise({ onClose, overlayActive }) {
           alt="wafaandtanzim birthday surprise"
           style={{ width: '100%', height: 220, objectFit: 'contain', border: 'none', background: 'none', borderRadius: 18, boxShadow: '0 4px 24px #b07bac22', marginBottom: 12 }}
         />
-        <img
-          src="/eatingcakewafa.jpg"
-          alt="Wafa eating cake birthday surprise"
-          style={{ width: '100%', height: 120, objectFit: 'cover', border: 'none', background: 'none', borderRadius: 14, boxShadow: '0 2px 12px #b07bac22', marginBottom: 10 }}
-        />
         <div style={{
           fontFamily: 'Great Vibes, cursive',
           fontSize: 36,
