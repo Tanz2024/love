@@ -15,14 +15,8 @@ export default function BirthdaySurprise({ onClose, overlayActive }) {
         if (playPromise !== undefined) {
           playPromise.then(() => setAudioPlayed(true)).catch(() => {
             // If autoplay is blocked, play on first user interaction
-            const resume = () => {
-              audioRef.current.play();
-              setAudioPlayed(true);
-              window.removeEventListener('click', resume);
-              window.removeEventListener('touchstart', resume);
-            };
-            window.addEventListener('click', resume);
-            window.addEventListener('touchstart', resume);
+            audioRef.current.play();
+            setAudioPlayed(true);
           });
         }
       };
@@ -55,6 +49,11 @@ export default function BirthdaySurprise({ onClose, overlayActive }) {
   }, [onClose]);
 
   const handleClick = () => {
+    if (audioRef.current && !audioPlayed) {
+      audioRef.current.volume = 0.22;
+      audioRef.current.play();
+      setAudioPlayed(true);
+    }
     setShowCake(false);
     if (onClose) onClose();
   };
